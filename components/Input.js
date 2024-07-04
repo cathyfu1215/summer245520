@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { TextInput } from 'react-native';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 const Input = () => {
   const[text, setText] = useState('');

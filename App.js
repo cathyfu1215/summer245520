@@ -3,31 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import { TextInput } from 'react-native';
 import React, { useState } from 'react';
+import Input from './components/Input';
 
 export default function App() {
 
   const appName = 'Cathy\'s summer project';
-  const[text, setText] = useState('');
-  const[password, setPassword] = useState('');
+
   return (
     <View style={styles.container}>
       <Header name = {appName} theme="dark">
       </Header>
       <Text>Welcome to {appName}(I am a text)</Text>
-      <TextInput 
-        style={{height:40}}
-        placeholder="Enter something here..."
-        onChangeText={newText => setText(newText)}
-        value={text}
-        autoCapitalize={true}
-      />
-      <Text>your input is: {text}</Text>
-      <TextInput 
-        style={{height:40}}
-        placeholder="Enter password..."
-        onChangeText={newText => setPassword(`*`.repeat(newText.length))}
-        value={password}
-      />
+      <Input />
        
       <StatusBar style="auto" />
     </View>
