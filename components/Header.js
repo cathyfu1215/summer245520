@@ -6,6 +6,7 @@ export default function Header(props) {
   return (
     <View>
       <Text>Welcome to {props.name} (I am a header)</Text>
+      {props.children}
     </View>
   )
 }
