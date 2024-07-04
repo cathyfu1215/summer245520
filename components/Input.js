@@ -8,7 +8,7 @@ const Input = () => {
   const[password, setPassword] = useState('');
   return (
     <View>
-      <Text>Input</Text>
+      <Text>Input block</Text>
       <TextInput 
         style={{height:40}}
         placeholder="Enter something here..."
@@ -17,6 +17,7 @@ const Input = () => {
         autoCapitalize={true}
       />
       <Text>your input is: {text}</Text>
+      <Text>Your password:</Text>
       <TextInput 
         style={{height:40}}
         placeholder="Enter password..."
