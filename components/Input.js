@@ -1,19 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
+import { View, Text } from 'react-native'
+import React from 'react'
 import { TextInput } from 'react-native';
 import React, { useState } from 'react';
 
-export default function App() {
-
-  const appName = 'Cathy\'s summer project';
+const Input = () => {
   const[text, setText] = useState('');
   const[password, setPassword] = useState('');
   return (
-    <View style={styles.container}>
-      <Header name = {appName} theme="dark">
-      </Header>
-      <Text>Welcome to {appName}(I am a text)</Text>
+    <View>
+      <Text>Input</Text>
       <TextInput 
         style={{height:40}}
         placeholder="Enter something here..."
@@ -28,17 +23,8 @@ export default function App() {
         onChangeText={newText => setPassword(`*`.repeat(newText.length))}
         value={password}
       />
-       
-      <StatusBar style="auto" />
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default Input
