@@ -7,8 +7,8 @@ export default function App() {
   const appName = 'Cathy\'s summer project';
   return (
     <View style={styles.container}>
-      <Header/>
-      <Text>Welcome to {appName}</Text>
+      <Header name = {appName}/>
+      <Text>Welcome to {appName}(I am a text)</Text>
       <StatusBar style="auto" />
     </View>
   );
