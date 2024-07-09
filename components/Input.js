@@ -22,6 +22,8 @@ const Input = (props) => {
 
   const handleConfirm = () => {
     console.log(text, password);
+    // call the received callback function
+    props.handleInputData(text);
   };
 
   return (
