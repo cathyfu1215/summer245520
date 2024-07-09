@@ -5,7 +5,7 @@ export default function Header(props) {
     console.log(props);
   return (
     <View>
-      <Text>Welcome to {props.name} (I am a header)</Text>
+      <Text>Welcome to {props.name}</Text>
       {props.children}
     </View>
   )
