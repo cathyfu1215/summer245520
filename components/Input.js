@@ -24,6 +24,7 @@ const Input = (props) => {
     // call the received callback function
     props.handleInputData(text);
     props.handleModalNotVisible();
+    setText('');
   };
 
   const styles = StyleSheet.create({
