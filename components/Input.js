@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import React from 'react'
 import { TextInput } from 'react-native';
 import  { useState } from 'react';
@@ -18,6 +18,10 @@ const Input = (props) => {
   const handleFocus = () => {
     setFocused(true);
     setLoseFocusMessage('');
+  };
+
+  const handleConfirm = () => {
+    console.log(text, password);
   };
 
   return (
@@ -42,6 +46,7 @@ const Input = (props) => {
         onChangeText={newText => setPassword(`*`.repeat(newText.length))}
         value={password}
       />
+      <Button title='confirm' onPress={handleConfirm}/>
     </View>
   )
 }
