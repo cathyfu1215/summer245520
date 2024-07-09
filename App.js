@@ -11,10 +11,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Header name = {appName} theme="dark">
-      </Header>
-      <Text>Welcome to {appName}(I am a text)</Text>
-      <Input />
+      <Header name = {appName} theme="dark"/>
+      <Input focused = {true} message='Thank you'/>
        
       <StatusBar style="auto" />
     </View>

@@ -3,9 +3,23 @@ import React from 'react'
 import { TextInput } from 'react-native';
 import  { useState } from 'react';
 
-const Input = () => {
+const Input = (props) => {
   const[text, setText] = useState('');
   const[password, setPassword] = useState('');
+
+  const [focused, setFocused] = useState(props.focused);
+  const [loseFocusMessage, setLoseFocusMessage] = useState('');
+
+  const handleBlur = () => {
+    setFocused(false);
+    setLoseFocusMessage(props.message);
+  };
+
+  const handleFocus = () => {
+    setFocused(true);
+    setLoseFocusMessage('');
+  };
+
   return (
     <View>
       <Text>Input block</Text>
@@ -14,9 +28,13 @@ const Input = () => {
         placeholder="Enter something here..."
         onChangeText={newText => setText(newText)}
         value={text}
-        autoCapitalize={true}
+        autoFocus={focused}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
       <Text>your input is: {text}</Text>
+      <Text>{loseFocusMessage}</Text>
+
       <Text>Your password:</Text>
       <TextInput 
         style={{height:40}}
