@@ -38,3 +38,9 @@ yarn-error.*
 
 # my setting
 .zshrc
+.gradle/
+gradlew
+gradlew.bat
+local.properties
+settings.gradle
+gradle
