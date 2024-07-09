@@ -3,6 +3,24 @@ import React from 'react'
 import { TextInput,StyleSheet } from 'react-native';
 import  { useState } from 'react';
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textStyle: {
+    fontSize: 20,
+    color: 'purple'
+  },
+  buttonStyle: {
+    width:"30%",
+    margin:10
+  },
+});
+
 const Input = (props) => {
   const[text, setText] = useState('');
 
@@ -27,14 +45,6 @@ const Input = (props) => {
     setText('');
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
 
   return (
     <Modal animationType='slide' visible={props.modalVisible}>
@@ -49,22 +59,17 @@ const Input = (props) => {
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <Text>your input is: {text}</Text>
+      <Text style={styles.textStyle}>your input is: {text}</Text>
       <Text>{loseFocusMessage}</Text>
 
-      <Button title='confirm' onPress={handleConfirm}/>
+      <View style={styles.buttonStyle}>
+        <Button title='confirm' onPress={handleConfirm}/>
+      </View>
     </View>
     </Modal>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
 
 export default Input

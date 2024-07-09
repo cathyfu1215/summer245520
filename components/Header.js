@@ -5,7 +5,7 @@ export default function Header(props) {
     console.log(props);
   return (
     <View>
-      <Text>Welcome to {props.name}</Text>
+      <Text style={{backgroundColor:"pink"}}>Welcome to {props.name}</Text>
       {props.children}
     </View>
   )
