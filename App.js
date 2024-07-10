@@ -33,7 +33,7 @@ export default function App() {
       <Button title="Add a goal" onPress={handleModalVisible}/>
       </View>
       </View>
-      <Input focused = {true} message='Thank you' handleInputData={handleInputData}
+      <Input focused = {true} message='Thank you for entering the input' handleInputData={handleInputData}
              modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}/>
       <View style={styles.bottomContainer}>
       <Text>{receivedText}</Text>

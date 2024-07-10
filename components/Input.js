@@ -80,11 +80,12 @@ const Input = (props) => {
       <Text>{loseFocusMessage}</Text>
       <View style={{flexDirection: 'row'}}>
       <View style={styles.buttonStyle}>
-        <Button title='confirm' onPress={handleConfirm} disabled={!confirmButtonEnabled}/>
-      </View>
-      <View style={styles.buttonStyle}>
         <Button title='cancel' onPress={handleCancel}/>
       </View>
+      <View style={styles.buttonStyle}>
+        <Button title='confirm' onPress={handleConfirm} disabled={!confirmButtonEnabled}/>
+      </View>
+      
       </View>
       
     </View>
