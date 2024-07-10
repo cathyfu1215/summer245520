@@ -9,8 +9,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    //justifyContent: 'center',
-    height:'50%',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 100,
   },
   textStyle: {
     fontSize: 20,
@@ -25,15 +26,14 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 100,
     height: 100,
-  
   },
   centerContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
-    backgroundColor: "lightgrey",
-    height:'50%'
+    backgroundColor: "wheat",
+  
     
   },
 });
@@ -72,7 +72,7 @@ const Input = (props) => {
     
     <View style={styles.container}>
     <View style={styles.centerContainer}>
-
+    
     <Image style={styles.imageStyle} alt='a target image' source={{
   uri:'https://cdn-icons-png.flaticon.com/512/2617/2617812.png'}} /> 
      <Image style={styles.imageStyle} alt='a target image' 
@@ -101,6 +101,7 @@ const Input = (props) => {
     </View>
     </View>
     </Modal>
+    
   )
 }
 
