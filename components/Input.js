@@ -8,9 +8,9 @@ import { Image } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
+    height:'50%',
   },
   textStyle: {
     fontSize: 20,
@@ -26,6 +26,15 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
+    backgroundColor: "lightgrey",
+    height:'50%'
+    
   },
 });
 
@@ -46,8 +55,7 @@ const Input = (props) => {
   };
 
   const handleConfirm = () => {
-    console.log(text);
-    // call the received callback function
+   
     props.handleInputData(text);
     props.handleModalNotVisible();
     setText('');
@@ -59,9 +67,11 @@ const Input = (props) => {
   };
 
   return (
-    <Modal animationType='slide' visible={props.modalVisible} >
+    
+    <Modal animationType='slide' visible={props.modalVisible} transparent={true} >
     
     <View style={styles.container}>
+    <View style={styles.centerContainer}>
 
     <Image style={styles.imageStyle} alt='a target image' source={{
   uri:'https://cdn-icons-png.flaticon.com/512/2617/2617812.png'}} /> 
@@ -88,6 +98,7 @@ const Input = (props) => {
       
       </View>
       
+    </View>
     </View>
     </Modal>
   )
