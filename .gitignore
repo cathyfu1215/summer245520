@@ -33,3 +33,14 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+
+
+# my setting
+.zshrc
+.gradle/
+gradlew
+gradlew.bat
+local.properties
+settings.gradle
+gradle
