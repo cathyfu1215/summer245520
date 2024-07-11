@@ -4,6 +4,8 @@ import Header from './components/Header';
 import React, { useState } from 'react';
 import Input from './components/Input';
 import { SafeAreaView } from 'react-native';
+import { FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
 
 
 
@@ -44,10 +46,20 @@ export default function App() {
       <Input focused = {true} message='Thank you for entering the input' handleInputData={handleInputData}
              modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}/>
       <View style={styles.bottomContainer}>
+      
       <Text style={styles.textStyle}>Your Goals:</Text>
-      {goals.length === 0 ? <Text>Please enter goals...</Text>:goals.map((goal)=>{
+      
+      {goals.length === 0 ? <Text>Please enter goals...</Text>:
+      <ScrollView>
+      {goals.map((goal)=>{
         return <View key={goal.id} style={{borderRadius: 10 ,borderWidth: 2, borderColor: 'lightgrey'}}><Text style={styles.textStyle}>{goal.text}</Text></View>
       })}
+      </ScrollView>
+      
+      }
+      
+     
+      
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>
