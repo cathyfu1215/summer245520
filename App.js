@@ -1,11 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,Button } from 'react-native';
-import Header from './components/Header';
 import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button, SafeAreaView, FlatList } from 'react-native';
+import Header from './components/Header';
 import Input from './components/Input';
-import { SafeAreaView } from 'react-native';
-import { FlatList } from 'react-native';
-import { ScrollView } from 'react-native';
 import GoalItem from './components/GoalItem';
 
 
@@ -36,6 +33,14 @@ export default function App() {
     setModalVisible(false);
   }
 
+  function handleDeleteGoal(id){
+    console.log('goal deleted',id);
+    newArray = goals.filter((goal)=>{
+      return goal.id !== id;
+    });
+    setGoals(newArray);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
@@ -63,7 +68,7 @@ export default function App() {
 
       <FlatList 
       renderItem={({item})=>{
-        return <GoalItem item={item}/>
+        return <GoalItem item={item} handleDeleteGoal={handleDeleteGoal}/>
       }}
       data={goals}/>
       
