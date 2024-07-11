@@ -52,6 +52,7 @@ const Input = (props) => {
   const handleFocus = () => {
     setFocused(true);
     setLoseFocusMessage('');
+    setConfirmButtonEnabled(true);
   };
 
   const handleConfirm = () => {

@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native';
 export default function App() {
   const [receivedText,setReceivedText] = useState(''); 
   const [modalVisible, setModalVisible] = useState(false);
-  const appName = 'Cathy\'s summer project - lab2';
+  const appName = 'Cathy\'s summer project';
 
   //to receive data
   function handleInputData(data){
