@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native';
 export default function App() {
   const [goals,setGoals] = useState([]); 
   const [modalVisible, setModalVisible] = useState(false);
-  const appName = 'Cathy\'s summer project';
+  const appName = 'Cathy\'s Goal Tracker';
 
   //to receive data
   function handleInputData(data){
@@ -18,10 +18,7 @@ export default function App() {
     //setReceivedText(receivedText.concat(data));
 
     //define a new object{text:data, id:random number}
-    const newGoal = {text:data, id:Math.random()};
-    const newArray = [...goals, newGoal];
-
-    
+    const newGoal = {text:data, id:Math.random()};  
     setGoals((goals)=>{
       return [...goals, newGoal]
     });
@@ -48,8 +45,8 @@ export default function App() {
              modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}/>
       <View style={styles.bottomContainer}>
       <Text style={styles.textStyle}>Your Goals:</Text>
-      {goals.map((goal)=>{
-        return <View style={{borderRadius: 10 ,borderWidth: 2, borderColor: 'lightgrey'}}><Text key={goal.id} style={styles.textStyle}>{goal.text}</Text></View>
+      {goals.length === 0 ? <Text>Please enter goals...</Text>:goals.map((goal)=>{
+        return <View key={goal.id} style={{borderRadius: 10 ,borderWidth: 2, borderColor: 'lightgrey'}}><Text style={styles.textStyle}>{goal.text}</Text></View>
       })}
       </View>
       <StatusBar style="auto" />
