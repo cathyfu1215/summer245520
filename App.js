@@ -49,7 +49,7 @@ export default function App() {
       <View style={styles.bottomContainer}>
       <Text style={styles.textStyle}>Your Goals:</Text>
       {goals.map((goal)=>{
-        return <Text key={goal.id} style={styles.textStyle}>{goal.text}</Text>
+        return <View style={{borderRadius: 10 ,borderWidth: 2, borderColor: 'lightgrey'}}><Text key={goal.id} style={styles.textStyle}>{goal.text}</Text></View>
       })}
       </View>
       <StatusBar style="auto" />
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     flex:4,
     backgroundColor: 'lightblue',
     alignItems: 'center',
+    rowGap: 5,
 
   }
 });
