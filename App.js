@@ -36,7 +36,7 @@ export default function App() {
       <Input focused = {true} message='Thank you for entering the input' handleInputData={handleInputData}
              modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}/>
       <View style={styles.bottomContainer}>
-      <Text>{receivedText}</Text>
+      <Text style={styles.textStyle}>{receivedText}</Text>
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -56,7 +56,11 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 20,
-    color: 'darkblue'
+    color: 'darkblue',
+    marginVertical:5,
+    padding:5,
+    backgroundColor: 'lightgrey',
+    borderRadius: 10,
   },
   topContainer:{
     flex:1,
