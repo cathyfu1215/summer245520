@@ -49,14 +49,20 @@ export default function App() {
       
       <Text style={styles.textStyle}>Your Goals:</Text>
       
-      {goals.length === 0 ? <Text>Please enter goals...</Text>:
-      <ScrollView>
+       {goals.length === 0 ? <Text>Please enter goals...</Text>:null}
+      
+      
+      {/*<ScrollView>
       {goals.map((goal)=>{
         return <View key={goal.id} style={{borderRadius: 10 ,borderWidth: 2, borderColor: 'lightgrey'}}><Text style={styles.textStyle}>{goal.text}</Text></View>
       })}
       </ScrollView>
       
-      }
+      } */}
+
+      <FlatList 
+      renderItem={({item})=>{return <Text key={item.id}>{item.text}</Text>}}
+      data={goals}/>
       
      
       
