@@ -6,6 +6,7 @@ import Input from './components/Input';
 import { SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native';
 import { ScrollView } from 'react-native';
+import GoalItem from './components/GoalItem';
 
 
 
@@ -61,7 +62,9 @@ export default function App() {
       } */}
 
       <FlatList 
-      renderItem={({item})=>{return <Text key={item.id}>{item.text}</Text>}}
+      renderItem={({item})=>{
+        return <GoalItem item={item}/>
+      }}
       data={goals}/>
       
      
