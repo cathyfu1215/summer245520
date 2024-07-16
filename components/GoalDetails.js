@@ -2,8 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native';
 
 function GoalDetails(props) {
- // console.log(props.route.params);
-
+ 
   // access route.parames to get the data passed from the previous screen
   return (
     <View>
