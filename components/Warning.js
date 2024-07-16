@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text } from 'react-native';
+import { Button } from 'react-native';
 
 function Warning() {
   return (
     <View>
-        <Text style={{color: "white", margin: 5, padding: 5}}>Warning</Text>
+        <Button title='Warning'/>
     </View>
   )
 }
