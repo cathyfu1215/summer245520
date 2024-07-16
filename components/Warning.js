@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 function Warning() {
   return (
     <View>
-        <Text style={{margin: 5, padding: 5}}>Warning</Text>
+        <Text style={{color: "white", margin: 5, padding: 5}}>Warning</Text>
     </View>
   )
 }

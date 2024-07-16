@@ -25,8 +25,14 @@ export default function App() {
     <Stack.Screen name="Details" component={GoalDetails} 
                   options={({ route }) => ({ title: route.params.text, 
                                              headerRight:()=> {return <Warning/> },
-                                             //headerLeft:()=> {return <Text>All my goals</Text> },
-                                             headerStyle: {backgroundColor: 'lightblue'},
+                                             headerLeft:()=> {return <Text style={{color: "white",margin: 5, padding: 5}}>  ← All my goals</Text> },
+                                             headerStyle: {
+                                              backgroundColor: 'darkblue',
+                                            },
+                                            headerTitleStyle: {
+                                              fontSize: 20,
+                                              color: 'white'
+                                            },
                                              })}/>
     </Stack.Navigator>
   
