@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
-    backgroundColor: "wheat",
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
   
     
   },
@@ -52,6 +52,7 @@ const Input = (props) => {
   const handleFocus = () => {
     setFocused(true);
     setLoseFocusMessage('');
+    setConfirmButtonEnabled(true);
   };
 
   const handleConfirm = () => {
@@ -104,9 +105,6 @@ const Input = (props) => {
     
   )
 }
-
-
-
 
 
 export default Input
