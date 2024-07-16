@@ -17,7 +17,7 @@ export default function App() {
       <Stack.Screen name="Home" component={Home} 
                     options={{headerStyle: styleHelper.headerStyle,
                               headerTitleStyle: styleHelper.headerTitleStyle,
-                              title:'Home'}}/>
+                              title:'All goals'}}/>
     <Stack.Screen name="Details" component={GoalDetails} 
                   options={({ route }) => ({ title: route.params.text, 
                                              headerRight:()=> {return <Warning/> },
