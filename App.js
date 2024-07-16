@@ -21,7 +21,6 @@ export default function App() {
     <Stack.Screen name="Details" component={GoalDetails} 
                   options={({ route }) => ({ title: route.params.text, 
                                              headerRight:()=> {return <Warning/> },
-                                             //headerLeft:()=> {return <Button title='← All my goals'/> },
                                              headerStyle: styleHelper.headerStyle,
                                              headerTitleStyle: styleHelper.headerTitleStyle
                                              })}/>
