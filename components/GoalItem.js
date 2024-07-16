@@ -10,6 +10,7 @@ function GoalItem(props) {
   function handleInformation(){
     // navigation.navigate(name, params)
     props.navigation.navigate('Details',{text:props.item.text, id:props.item.id});
+    //wrap the buttons in a view to style them
   }
     return (
       <View style={styles.itemContainer}>
