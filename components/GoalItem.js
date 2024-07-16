@@ -14,8 +14,8 @@ function GoalItem(props) {
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.textStyle}>{props.item.text}</Text>
-        <Button color='lightgrey' onPress={() => props.handleDeleteGoal(props.item.id)} title="x"/>
-        <Button color='lightgrey' onPress={handleInformation} title="i"/>
+        <Button color='grey' onPress={() => props.handleDeleteGoal(props.item.id)} title="x"/>
+        <Button color='grey' onPress={handleInformation} title="i"/>
       </View>
     )
   }
