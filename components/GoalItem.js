@@ -6,10 +6,16 @@ import { StyleSheet } from 'react-native'
 
 
 function GoalItem(props) {
+
+  function handleInformation(){
+    // navigation.navigate(name, params)
+    props.navigation.navigate('Details',{text:props.item.text, id:props.item.id});
+  }
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.textStyle}>{props.item.text}</Text>
-        <Button color='black' onPress={() => props.handleDeleteGoal(props.item.id)} title="x"/>
+        <Button color='lightgrey' onPress={() => props.handleDeleteGoal(props.item.id)} title="x"/>
+        <Button color='lightgrey' onPress={handleInformation} title="i"/>
       </View>
     )
   }
@@ -19,7 +25,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      // alignItems: 'center',
+      alignItems: 'center',
       justifyContent: 'center',
     },
     buttonStyle: {
@@ -27,7 +33,7 @@ const styles = StyleSheet.create({
       margin:10
     },
     textStyle: {
-      fontSize: 20,
+      fontSize: 15,
       color: 'darkblue',
       marginVertical:5,
       padding:5,
