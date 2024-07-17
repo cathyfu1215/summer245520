@@ -8,8 +8,8 @@ import { styleHelper } from '../styleHelper';
 function GoalItem(props) {
 
   function handleInformation(){
-    // navigation.navigate(name, params)
-    props.navigation.navigate('Details',{text:props.item.text, id:props.item.id});
+    // navigation.navigate(routeName, paramObject)
+    props.navigation.navigate('Details',{text:props.item.text, id:props.item.id, isWarning:false});
     //wrap the buttons in a view to style them
   }
     return (

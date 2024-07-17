@@ -7,6 +7,9 @@ function Warning(props) {
     props.navigation.setOptions({title:'Warning',headerStyle: {
       backgroundColor: 'red',
     },});
+    
+    props.navigation.navigate('Details',{text:props.route.params.text, 
+      id:props.route.params.id, isWarning:true});
   }
 
 

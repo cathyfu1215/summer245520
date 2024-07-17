@@ -24,7 +24,9 @@ export default function App() {
                   options={({ navigation, route }) => ({ title: route.params.text, 
                                              headerRight:()=> {return  <Warning navigation= {navigation} route={route} />},
                                              headerStyle: styleHelper.headerStyle,
+                                             
                                              headerTitleStyle: styleHelper.headerTitleStyle,
+                                             
                   })}/>
                                              
     </Stack.Navigator>
