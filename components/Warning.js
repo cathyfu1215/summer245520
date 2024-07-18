@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Pressable } from 'react-native';
 import { styleHelper } from '../styleHelper';
+import PressableButton from './PressableButton';
 
 
 function Warning(props) {
@@ -16,9 +17,10 @@ function Warning(props) {
 
   return (
     <View>
-        <Pressable onPress={handleWarning}>
-        <Text style={styleHelper.warningButtonStyle}>Warning</Text>
-        </Pressable>
+        <PressableButton pressedFunction={handleWarning}>
+          <Text style={styleHelper.warningButtonStyle}>Warning</Text>
+        </PressableButton>
+
     </View>
   )
 }
