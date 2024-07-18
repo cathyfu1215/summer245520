@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text } from 'react-native';
-import { Button } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
+import { styleHelper } from '../styleHelper';
+
 
 function Warning(props) {
   function handleWarning(){
@@ -15,7 +16,9 @@ function Warning(props) {
 
   return (
     <View>
-        <Button title='Warning' onPress={handleWarning}/>
+        <Pressable onPress={handleWarning}>
+        <Text style={styleHelper.warningButtonStyle}>Warning</Text>
+        </Pressable>
     </View>
   )
 }
