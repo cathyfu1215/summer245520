@@ -15,17 +15,23 @@ export default function App() {
   
   return(
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator 
+    
+    /* 
+    Modified after lab3: 
+    added screenOptions to apply the same style to all screens 
+    */
+    screenOptions={
+          {headerStyle: styleHelper.headerStyle,
+          headerTitleStyle: styleHelper.headerTitleStyle,}
+        }
+        >
       <Stack.Screen name="Home" component={Home} 
-                    options={{headerStyle: styleHelper.headerStyle,
-                              headerTitleStyle: styleHelper.headerTitleStyle,
-                              title:'All goals'}}/>
+                    options={{title:'All goals'}}
+                    />
     <Stack.Screen name="Details" component={GoalDetails} 
                   options={({ navigation, route }) => ({ title: route.params.text, 
-                                             headerRight:()=> {return  <Warning navigation= {navigation} route={route} />},
-                                             headerStyle: styleHelper.headerStyle,
-                                             headerTitleStyle: styleHelper.headerTitleStyle,
-                                             
+                                             headerRight:()=> {return  <Warning navigation= {navigation} route={route} />},  
                   })}/>
                                              
     </Stack.Navigator>
