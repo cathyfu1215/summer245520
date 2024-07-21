@@ -3,7 +3,6 @@ import Home from './components/Home';
 import GoalDetails from './components/GoalDetails';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Warning from './components/Warning';
 import { styleHelper } from './styleHelper';
 
 
@@ -31,7 +30,7 @@ export default function App() {
                     />
     <Stack.Screen name="Details" component={GoalDetails} 
                   options={({ navigation, route }) => ({ title: route.params.text, 
-                                             headerRight:()=> {return  <Warning navigation= {navigation} route={route} />},  
+                                           //  headerRight:()=> {return  <Warning navigation= {navigation} route={route} />},  
                   })}/>
                                              
     </Stack.Navigator>
