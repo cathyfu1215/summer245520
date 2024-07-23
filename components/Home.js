@@ -4,20 +4,42 @@ import { StyleSheet, Text, View, Button, SafeAreaView, FlatList } from 'react-na
 import Header from './Header';
 import Input from './Input';
 import GoalItem from './GoalItem';
+import { writeToDB } from '../Firebase/firestoreHelper';
+import { useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { database } from '../Firebase/firebaseSetup';
+import { deleteFromDB } from '../Firebase/firestoreHelper';
 
 
 function Home(props) {
-    const [goals,setGoals] = useState([]); 
+
+  const [goals,setGoals] = useState([]); 
+
+  useEffect(() => {
+    onSnapshot(collection(database, "goals"), (querySnapshot) => {
+      const goals = [];
+      querySnapshot.forEach((doc) => {
+        goals.push({...doc.data(), id: doc.id});
+      });
+      setGoals(goals);
+    })
+  }, [])
+
+
+
+    
     const [modalVisible, setModalVisible] = useState(false);
     const appName = 'Cathy\'s Goal Tracker';
   
     
     function handleInputData(data){
   
-      const newGoal = {text:data, id:Math.random()};  
-      setGoals((goals)=>{
-        return [...goals, newGoal]
-      });
+       const newGoal = {text:data};  
+      // setGoals((goals)=>{
+      //   return [...goals, newGoal]
+      // });
+
+       writeToDB(newGoal);
   
     }
   
@@ -30,11 +52,13 @@ function Home(props) {
     }
   
     function handleDeleteGoal(id){
-      console.log('goal deleted',id);
-      newArray = goals.filter((goal)=>{
-        return goal.id !== id;
-      });
-      setGoals(newArray);
+      // console.log('goal deleted',id);
+      // newArray = goals.filter((goal)=>{
+      //   return goal.id !== id;
+      // });
+      // setGoals(newArray);
+      deleteFromDB(id);
+
     }
   return (
     <SafeAreaView style={styles.container}>
