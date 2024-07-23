@@ -5,10 +5,28 @@ import Header from './Header';
 import Input from './Input';
 import GoalItem from './GoalItem';
 import { writeToDB } from '../Firebase/firestoreHelper';
+import { useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { database } from '../Firebase/firebaseSetup';
 
 
 function Home(props) {
-    const [goals,setGoals] = useState([]); 
+
+  const [goals,setGoals] = useState([]); 
+
+  useEffect(() => {
+    onSnapshot(collection(database, "goals"), (querySnapshot) => {
+      const goals = [];
+      querySnapshot.forEach((doc) => {
+        goals.push({...doc.data(), id: doc.id});
+      });
+      setGoals(goals);
+    })
+  }, [])
+
+
+
+    
     const [modalVisible, setModalVisible] = useState(false);
     const appName = 'Cathy\'s Goal Tracker';
   
