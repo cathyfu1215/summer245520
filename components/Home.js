@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, SafeAreaView, FlatList } from 'react-na
 import Header from './Header';
 import Input from './Input';
 import GoalItem from './GoalItem';
+import { writeToDB } from '../Firebase/firestoreHelper';
 
 
 function Home(props) {
@@ -14,10 +15,12 @@ function Home(props) {
     
     function handleInputData(data){
   
-      const newGoal = {text:data, id:Math.random()};  
-      setGoals((goals)=>{
-        return [...goals, newGoal]
-      });
+       const newGoal = {text:data, id:Math.random()};  
+      // setGoals((goals)=>{
+      //   return [...goals, newGoal]
+      // });
+
+       writeToDB(newGoal);
   
     }
   
