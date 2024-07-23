@@ -3,6 +3,8 @@ import { View, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { updateDB } from '../Firebase/firestoreHelper';
+
 
 function GoalDetails({route,navigation}) {
 
@@ -19,6 +21,7 @@ function GoalDetails({route,navigation}) {
     console.log("warning");
     setWarning(true);
     navigation.setOptions({ title: "Warning!" });
+    updateDB(route.params.id);
   }
   useEffect(() => {
     navigation.setOptions({
