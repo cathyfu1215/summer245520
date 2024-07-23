@@ -1,5 +1,4 @@
-import {apiKey} from "@env"
-
+import {apiKey,authDomain,projectId,storageBucket,messagingSenderId,appId} from "@env";
 import { getFirestore } from 'firebase/firestore';
 
 // Import the functions you need from the SDKs you need
@@ -10,11 +9,11 @@ import { initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: `${apiKey}`,
-  authDomain: "summer245520.firebaseapp.com",
-  projectId: "summer245520",
-  storageBucket: "summer245520.appspot.com",
-  messagingSenderId: "313733660743",
-  appId: "1:313733660743:web:ec46ffe0d12ff755a2f162"
+  authDomain: `${authDomain}`,
+  projectId: `${projectId}`,
+  storageBucket: `${storageBucket}`,
+  messagingSenderId: `${messagingSenderId}`,
+  appId: `${appId}`
 };
 
 // Initialize Firebase

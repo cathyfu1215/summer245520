@@ -8,6 +8,7 @@ import { writeToDB } from '../Firebase/firestoreHelper';
 import { useEffect } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { database } from '../Firebase/firebaseSetup';
+import { deleteFromDB } from '../Firebase/firestoreHelper';
 
 
 function Home(props) {
@@ -33,7 +34,7 @@ function Home(props) {
     
     function handleInputData(data){
   
-       const newGoal = {text:data, id:Math.random()};  
+       const newGoal = {text:data};  
       // setGoals((goals)=>{
       //   return [...goals, newGoal]
       // });
@@ -51,11 +52,13 @@ function Home(props) {
     }
   
     function handleDeleteGoal(id){
-      console.log('goal deleted',id);
-      newArray = goals.filter((goal)=>{
-        return goal.id !== id;
-      });
-      setGoals(newArray);
+      // console.log('goal deleted',id);
+      // newArray = goals.filter((goal)=>{
+      //   return goal.id !== id;
+      // });
+      // setGoals(newArray);
+      deleteFromDB(id);
+
     }
   return (
     <SafeAreaView style={styles.container}>
