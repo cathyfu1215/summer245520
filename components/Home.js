@@ -19,7 +19,7 @@ function Home(props) {
 
   //useEffect uses a function and a dependency array
   useEffect(() => {
-    onSnapshot(collection(database, "goals"), (querySnapshot) => {
+    const unsubscribe = onSnapshot(collection(database, "goals"), (querySnapshot) => {
       const goals = [];
       querySnapshot.forEach((doc) => {
         goals.push({...doc.data(), id: doc.id}); //spread it and add id(key-value)
