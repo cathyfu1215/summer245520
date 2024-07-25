@@ -2,8 +2,9 @@ import React from 'react'
 import { View,Text } from 'react-native'
 import { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { addUser } from '../Firebase/firestoreHelper';
 
-function GoalUsers() {
+function GoalUsers({goalID}) {
 
     const [users, setUsers] = useState([]);
 
@@ -18,6 +19,11 @@ function GoalUsers() {
             }
             const data = await response.json();
             console.log('fetched data:', data);
+
+
+            data.forEach(element => {
+                addUser(element,goalID);
+            });
             setUsers(data);
             
           } catch (error) {

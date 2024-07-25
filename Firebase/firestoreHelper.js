@@ -38,11 +38,11 @@ export async function writeToDB(goal) {
 	  }
 
 
-	  export async function addUser(user) {
+	  export async function addUser(user,goalID) {
 		try {  
 			// addDoc will automatically generate an id for the document
-			 await addDoc(collection(database, "users"), {
-				user:user,
+			 await addDoc(collection(database, `goals/${goalID}/users`), {
+				user
 			  });
 		  }
 		catch (err) {
@@ -51,6 +51,7 @@ export async function writeToDB(goal) {
 	  }
 
 
+	  // need some fixing here
 	  export async function getUsers() {
 		try {  
 			const userSnapshot = await getDocs(usersCol);

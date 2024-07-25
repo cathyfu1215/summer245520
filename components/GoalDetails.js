@@ -9,7 +9,7 @@ import GoalUsers from './GoalUsers';
 
 function GoalDetails({route,navigation}) {
 
-  //console.log(route.params);
+  console.log(route.params);
 
   /*
   Modification after lab3:
@@ -48,7 +48,7 @@ function GoalDetails({route,navigation}) {
           <Text></Text>
         )}
 
-      <GoalUsers/>
+      <GoalUsers goalID={route.params.id}/>
       </View>
     );
   }
