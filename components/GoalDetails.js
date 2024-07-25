@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { updateDB } from '../Firebase/firestoreHelper';
+import {GoalUsers} from './GoalUsers';
 
 
 function GoalDetails({route,navigation}) {

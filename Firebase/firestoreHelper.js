@@ -36,3 +36,28 @@ export async function writeToDB(goal) {
 		  console.log(err)
 		}
 	  }
+
+
+	  export async function addUser(user) {
+		try {  
+			// addDoc will automatically generate an id for the document
+			 await addDoc(collection(database, "users"), {
+				user:user,
+			  });
+		  }
+		catch (err) {
+			console.log(err)
+		  }
+	  }
+
+
+	  export async function getUsers() {
+		try {  
+			const userSnapshot = await getDocs(usersCol);
+			const userList = userSnapshot.docs.map(doc => doc.data());
+			return userList;
+		  }
+		catch (err) {
+			console.log(err)
+		  }
+	  }
