@@ -3,6 +3,7 @@ import { View,Text } from 'react-native'
 import { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { addUser } from '../Firebase/firestoreHelper';
+import {getUsers} from '../Firebase/firestoreHelper';
 
 function GoalUsers({goalID}) {
 
@@ -11,6 +12,13 @@ function GoalUsers({goalID}) {
     useEffect(() => {
         const fetchData = async () => {
           try {
+            const existedUsers = await getUsers(goalID);
+            if(!existedUsers){
+                setUsers(existedUsers);
+                console.log('users exist:');
+                return;
+            }
+        
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             // console.log(response.ok); //useful to know the status of the fetch
             

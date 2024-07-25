@@ -2,6 +2,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 import { doc, deleteDoc } from "firebase/firestore"; 
 import {updateDoc} from 'firebase/firestore';
+import { getDocs } from "firebase/firestore";
 
 export async function writeToDB(goal) {
 	try {  
@@ -52,10 +53,11 @@ export async function writeToDB(goal) {
 
 
 	  // need some fixing here
-	  export async function getUsers() {
+	  export async function getUsers(goalID) {
 		try {  
-			const userSnapshot = await getDocs(usersCol);
+			const userSnapshot = await getDocs(collection(database, `goals/${goalID}/users`));
 			const userList = userSnapshot.docs.map(doc => doc.data());
+			//console.log('getting user list:',userList);
 			return userList;
 		  }
 		catch (err) {
