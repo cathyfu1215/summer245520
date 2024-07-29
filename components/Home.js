@@ -42,11 +42,11 @@ function Home(props) {
     function handleInputData(data){
   
        const newGoal = {text:data};  
-      // setGoals((goals)=>{
-      //   return [...goals, newGoal]
-      // });
+ 
 
-       writeToDB(newGoal);
+      // writeToDB(newGoal);
+      // using the generalized function
+      writeToDB(newGoal, "goals");
   
     }
   

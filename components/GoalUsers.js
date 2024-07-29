@@ -9,38 +9,38 @@ function GoalUsers({goalID}) {
 
     const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const existedUsers = await getUsers(goalID);
-            if(!existedUsers){
-                setUsers(existedUsers);
-                console.log('users exist:');
-                return;
-            }
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //       try {
+    //         const existedUsers = await getUsers(goalID);
+    //         if(existedUsers){
+    //             setUsers(existedUsers);
+    //             console.log('users exist:');
+    //             return;
+    //         }
         
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
-            // console.log(response.ok); //useful to know the status of the fetch
+    //         const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    //         // console.log(response.ok); //useful to know the status of the fetch
             
-            if(!response.ok){
-              throw new Error('failed to fetch');
-            }
-            const data = await response.json();
-            console.log('fetched data:', data);
+    //         if(!response.ok){
+    //           throw new Error('failed to fetch');
+    //         }
+    //         const data = await response.json();
+    //         console.log('fetched data:', data);
 
 
-            data.forEach(element => {
-                addUser(element,goalID);
-            });
-            setUsers(data);
+    //         data.forEach(element => {
+    //             addUser(element,goalID);
+    //         });
+    //         setUsers(data);
             
-          } catch (error) {
-            console.error("Error:", error);
-          }
-        };
+    //       } catch (error) {
+    //         console.error("Error:", error);
+    //       }
+    //     };
       
-        fetchData();
-      }, []);
+    //     fetchData();
+    //   }, []);
 
     const renderItem = ({ item }) => (
         <Text>{item.name}</Text> // assuming the user object has a 'name' property
