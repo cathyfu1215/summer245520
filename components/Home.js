@@ -17,7 +17,8 @@ function Home(props) {
   const [goals,setGoals] = useState([]); 
 
 
-  //useEffect uses a function and a dependency array
+  // useEffect uses a function and a dependency array
+  // onSnapshot is a listener that listens to the changes in the database
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(database, "goals"), (querySnapshot) => {
       const goals = [];
@@ -42,11 +43,9 @@ function Home(props) {
     function handleInputData(data){
   
        const newGoal = {text:data};  
-      // setGoals((goals)=>{
-      //   return [...goals, newGoal]
-      // });
-
-       writeToDB(newGoal);
+      // writeToDB(newGoal);
+      // using the generalized function
+      writeToDB(newGoal, "goals");
   
     }
   
@@ -59,12 +58,9 @@ function Home(props) {
     }
   
     function handleDeleteGoal(id){
-      // console.log('goal deleted',id);
-      // newArray = goals.filter((goal)=>{
-      //   return goal.id !== id;
-      // });
-      // setGoals(newArray);
-      deleteFromDB(id);
+
+      //deleteFromDB(id);
+      deleteFromDB(id, "goals");
 
     }
   return (

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { updateDB } from '../Firebase/firestoreHelper';
+import GoalUsers from './GoalUsers';
 
 
 function GoalDetails({route,navigation}) {
@@ -18,10 +19,10 @@ function GoalDetails({route,navigation}) {
 
   const [warning, setWarning] = useState(false);
   function warningHandler() {
-    console.log("warning");
+    //console.log("warning");
     setWarning(true);
     navigation.setOptions({ title: "Warning!" });
-    updateDB(route.params.id);
+    updateDB(route.params.id, "goals");
   }
   useEffect(() => {
     navigation.setOptions({
@@ -37,6 +38,8 @@ function GoalDetails({route,navigation}) {
   
   return (
     <View>
+    
+
       {route.params ? (<Text style={warning && styles.warningStyle}>
           goal text :
           {route.params.text}, id:{route.params.id}
@@ -44,6 +47,8 @@ function GoalDetails({route,navigation}) {
         ) : (
           <Text></Text>
         )}
+
+      <GoalUsers goalID={route.params.id}/>
       </View>
     );
   }
