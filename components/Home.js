@@ -17,7 +17,8 @@ function Home(props) {
   const [goals,setGoals] = useState([]); 
 
 
-  //useEffect uses a function and a dependency array
+  // useEffect uses a function and a dependency array
+  // onSnapshot is a listener that listens to the changes in the database
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(database, "goals"), (querySnapshot) => {
       const goals = [];

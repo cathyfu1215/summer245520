@@ -67,28 +67,28 @@ export async function writeToDB(data, collectionName) {
 	  }
 
 
-	  export async function addUser(user,goalID) {
-		try {  
-			// addDoc will automatically generate an id for the document
-			 await addDoc(collection(database, `goals/${goalID}/users`), {
-				user
-			  });
-		  }
-		catch (err) {
-			console.log(err)
-		  }
-	  }
-
-
-	  // need some fixing here
-	//   export async function getUsers(goalID) {
+	//   export async function addUser(user,goalID) {
 	// 	try {  
-	// 		const userSnapshot = await getDocs(collection(database, `goals/${goalID}/users`));
-	// 		const userList = userSnapshot.docs.map(doc => doc.data());
-	// 		//console.log('getting user list:',userList);
-	// 		return userList;
+	// 		// addDoc will automatically generate an id for the document
+	// 		 await addDoc(collection(database, `goals/${goalID}/users`), {
+	// 			user
+	// 		  });
 	// 	  }
 	// 	catch (err) {
 	// 		console.log(err)
 	// 	  }
 	//   }
+
+
+	 
+	  export async function getFromDB(id, collectionName,subCollectionName) {
+		try {  
+			const userSnapshot = await getDocs(collection(database, `${collectionName}/${id}/${subCollectionName}`));
+			const userList = userSnapshot.docs.map(doc => doc.data());
+			//console.log('getting user list:',userList);
+			return userList;
+		  }
+		catch (err) {
+			console.log(err)
+		  }
+	  }
