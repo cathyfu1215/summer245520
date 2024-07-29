@@ -22,7 +22,7 @@ function GoalDetails({route,navigation}) {
     console.log("warning");
     setWarning(true);
     navigation.setOptions({ title: "Warning!" });
-    updateDB(route.params.id);
+    updateDB(route.params.id, "goals");
   }
   useEffect(() => {
     navigation.setOptions({

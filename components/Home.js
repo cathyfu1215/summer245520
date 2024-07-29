@@ -42,8 +42,6 @@ function Home(props) {
     function handleInputData(data){
   
        const newGoal = {text:data};  
- 
-
       // writeToDB(newGoal);
       // using the generalized function
       writeToDB(newGoal, "goals");
@@ -59,12 +57,9 @@ function Home(props) {
     }
   
     function handleDeleteGoal(id){
-      // console.log('goal deleted',id);
-      // newArray = goals.filter((goal)=>{
-      //   return goal.id !== id;
-      // });
-      // setGoals(newArray);
-      deleteFromDB(id);
+
+      //deleteFromDB(id);
+      deleteFromDB(id, "goals");
 
     }
   return (
