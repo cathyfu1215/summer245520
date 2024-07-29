@@ -9,7 +9,7 @@ import GoalUsers from './GoalUsers';
 
 function GoalDetails({route,navigation}) {
 
-  console.log(route.params);
+  //console.log(route.params);
 
   /*
   Modification after lab3:
@@ -19,7 +19,7 @@ function GoalDetails({route,navigation}) {
 
   const [warning, setWarning] = useState(false);
   function warningHandler() {
-    console.log("warning");
+    //console.log("warning");
     setWarning(true);
     navigation.setOptions({ title: "Warning!" });
     updateDB(route.params.id, "goals");
