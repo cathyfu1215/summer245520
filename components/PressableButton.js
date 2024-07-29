@@ -3,7 +3,7 @@ import { Pressable } from 'react-native';
 
 function PressableButton({children, pressedFunction}) {
   return (
-    <Pressable onPress={pressedFunction}>
+    <Pressable style={{backgroundColor:'lightblue',margin: 10, padding: 5, alignItems:'center'}} onPress={pressedFunction}>
         {children}
     </Pressable>
   )

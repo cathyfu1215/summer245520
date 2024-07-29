@@ -68,6 +68,10 @@ function Home(props) {
       <View style={styles.topContainer}>
       <Header name = {appName} theme="dark"/>
       <View style={styles.buttonStyle}>
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+      <Button title="Sign up" onPress={()=>props.navigation.navigate('Signup')}/>
+      <Button title="Login" onPress={()=>props.navigation.navigate('Login')}/>
+        </View>
       <Button title="Add a goal" onPress={handleModalVisible}/>
       </View>
       </View>
@@ -123,13 +127,13 @@ const styles = StyleSheet.create({
       borderRadius: 10,
     },
     topContainer:{
-      flex:1,
+      flex:2,
       backgroundColor: 'lightgreen',
       alignItems: 'center',
   
     },
     bottomContainer:{
-      flex:4,
+      flex:5,
       backgroundColor: 'lightblue',
       alignItems: 'center',
       rowGap: 5,

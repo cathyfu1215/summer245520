@@ -4,6 +4,8 @@ import GoalDetails from './components/GoalDetails';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { styleHelper } from './styleHelper';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 
 
@@ -32,6 +34,12 @@ export default function App() {
                   options={({ navigation, route }) => ({ title: route.params.text, 
                                            //  headerRight:()=> {return  <Warning navigation= {navigation} route={route} />},  
                   })}/>
+       <Stack.Screen name="Signup" component={Signup} 
+                    options={{title:'Signup'}}
+                    />
+      <Stack.Screen name="Login" component={Login} 
+                    options={{title:'Login'}}
+                    />
                                              
     </Stack.Navigator>
   
