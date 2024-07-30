@@ -5,8 +5,8 @@ import { auth } from '../Firebase/firebaseSetup';
 function Profile() {
   return (
     <View>
-        <Text>Email:{auth.currentUser.email}</Text>
-        <Text>UID:{auth.currentUser.uid}</Text>
+        <Text style={{margin:10}}>Email:{auth.currentUser.email}</Text>
+        <Text style={{margin:10}}>UID:{auth.currentUser.uid}</Text>
     </View>
   )
 }

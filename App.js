@@ -41,12 +41,13 @@ export default function App() {
   }, []);
  
   const AuthStack = <>
-    <Stack.Screen name="Signup" component={Signup} 
-                      options={{title:'Signup'}}
-                      />
     <Stack.Screen name="Login" component={Login} 
                       options={{title:'Login'}}
                       />
+    <Stack.Screen name="Signup" component={Signup} 
+                      options={{title:'Signup'}}
+                      />
+    
   </>;
 const AppStack = <>
   <Stack.Screen name="Home" component={Home} 

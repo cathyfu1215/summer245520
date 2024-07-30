@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
       borderRadius: 10,
     },
     topContainer:{
-      flex:2,
-      backgroundColor: 'lightgreen',
+      flex:1,
+      backgroundColor: 'white',
       alignItems: 'center',
   
     },
     bottomContainer:{
-      flex:5,
+      flex:4,
       backgroundColor: 'lightblue',
       alignItems: 'center',
       rowGap: 5,
