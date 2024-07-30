@@ -12,7 +12,7 @@ function Login(props) {
 
 
     function jumpToSignup(){
-        props.navigation.navigate('Signup');
+        props.navigation.replace('Signup');
     }
     function handleLogin(){
         console.log('login');

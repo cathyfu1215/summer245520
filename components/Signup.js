@@ -13,7 +13,7 @@ function Signup(props) {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     function jumpToLogin(){
-        props.navigation.navigate('Login');
+        props.navigation.replace('Login');
     }
 
     function handleRegister(){
