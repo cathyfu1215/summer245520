@@ -7,8 +7,16 @@ import { styleHelper } from './styleHelper';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import { useState } from 'react';
-import {onAuthStateChanged} from 'firebase/auth';
+import {onAuthStateChanged, signOut} from 'firebase/auth';
 import { auth } from './Firebase/firebaseSetup';
+import Profile from './components/Profile';
+import PressableButton from './components/PressableButton';
+import { Text } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+
+
+
 
 
 
@@ -41,12 +49,40 @@ export default function App() {
                       />
   </>;
 const AppStack = <>
-    <Stack.Screen name="Home" component={Home} 
-                    options={{title:'All goals'}}
+  <Stack.Screen name="Home" component={Home} 
+                    options={{title:'All goals', 
+                      headerRight: () => {
+                        const navigation = useNavigation();
+                        return (
+                          <PressableButton pressedFunction={() => navigation.navigate('Profile')}>
+                            <AntDesign name="user" size={24} color="black" />
+                          </PressableButton>
+                        );
+                      }
+                    }}
                     />
     <Stack.Screen name="Details" component={GoalDetails} 
                   options={({ navigation, route }) => ({ title: route.params.text, 
                   })}/>
+    <Stack.Screen name="Profile" component={Profile}
+                  options={{title:'Profile',headerRight: () => {
+                    const navigation = useNavigation();
+                    return (
+                      <PressableButton pressedFunction={async() => {
+                        try {
+                          signOut(auth)
+                        }
+                        catch (error) {
+                          console.log(error);
+                        }
+                      }}
+                      >
+                       <AntDesign name="logout" size={24} color="black" />
+                      </PressableButton>
+                    );
+                  }
+                }}
+                />
 </>
   
   return(
