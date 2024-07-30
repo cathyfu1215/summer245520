@@ -68,10 +68,10 @@ function Home(props) {
       <View style={styles.topContainer}>
       <Header name = {appName} theme="dark"/>
       <View style={styles.buttonStyle}>
-        <View style={{alignItems:'center',flexDirection:'row'}}>
-      <Button title="Sign up" onPress={()=>props.navigation.navigate('Signup')}/>
-      <Button title="Login" onPress={()=>props.navigation.navigate('Login')}/>
-        </View>
+        {/* <View style={{alignItems:'center',flexDirection:'row'}}> */}
+      {/* <Button title="Sign up" onPress={()=>props.navigation.navigate('Signup')}/>
+      <Button title="Login" onPress={()=>props.navigation.navigate('Login')}/> */}
+        {/* </View> */}
       <Button title="Add a goal" onPress={handleModalVisible}/>
       </View>
       </View>
