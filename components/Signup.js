@@ -20,6 +20,25 @@ function Signup(props) {
         console.log('some validation...');
         console.log('registering');
         console.log('auth',auth);
+
+        // check if password and confirm password match
+        if(password !== confirmPassword){
+            alert('Passwords do not match');
+            return;
+        }
+
+        // password length should be at least 6
+        if(password.length < 6){
+            alert('Password should be at least 6 characters');
+            return;
+        }
+
+        // check if email is in the right format using regular expression
+        const emailPattern = /\S+@\S+\.\S+/;
+        if(!emailPattern.test(email)){
+            alert('Email is not in the right format');
+            return;
+        }
     
         
         createUserWithEmailAndPassword(auth, email, password)
@@ -31,7 +50,7 @@ function Signup(props) {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                alert(errorCode,errorMessage);
+                alert(errorCode,errorMessage); // alert the error message to the user
             });
 
     }
