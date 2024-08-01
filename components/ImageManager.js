@@ -7,11 +7,26 @@ import Feather from '@expo/vector-icons/Feather';
 
 
 function ImageManager() {
+    const [status, requestPermission] = ImagePicker.useCameraPermissions();
+
+    const vefifyPermissions = async() => {
+        if(status.granted === true) {
+            return true;
+        }
+        else{
+            return await requestPermission();
+            
+        }
+       
+    }
 
     const takeImageHandler = async () => {
+       
+
         try {
-          const result = await ImagePicker.launchCameraAsync({});
-          console.log(result);
+            vefifyPermissions();
+            const result = await ImagePicker.launchCameraAsync({});
+            console.log('result from camera',result);
         }
         catch (err) {
             console.log(err);
