@@ -6,9 +6,11 @@ import Input from './Input';
 import GoalItem from './GoalItem';
 import { writeToDB } from '../Firebase/firestoreHelper';
 import { useEffect } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot,query,where } from 'firebase/firestore';
 import { database } from '../Firebase/firebaseSetup';
 import { deleteFromDB } from '../Firebase/firestoreHelper';
+import { auth } from '../Firebase/firebaseSetup';
+
 
 
 
@@ -20,18 +22,31 @@ function Home(props) {
   // useEffect uses a function and a dependency array
   // onSnapshot is a listener that listens to the changes in the database
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(database, "goals"), (querySnapshot) => {
-      const goals = [];
-      querySnapshot.forEach((doc) => {
-        goals.push({...doc.data(), id: doc.id}); //spread it and add id(key-value)
-      });
-      setGoals(goals);
-    })
-    //Q2 in Lab4, clear up, I learned this from Copilot
-    return () => {
-      unsubscribe();
-    };
+    try {
+      console.log('current user:', auth.currentUser.uid);
+      const unsubscribe = onSnapshot(
+        query(collection(database, "goals"), 
+        where("owner", "==", auth.currentUser.uid)
+        ),
+        (querySnapshot) => {
+          const goals = [];
+          querySnapshot.forEach((doc) => {
+            goals.push({...doc.data(), id: doc.id}); //spread it and add id(key-value)
+          });
+          console.log(goals);
+          setGoals(goals);
+        }
+      )
+      //Q2 in Lab4, clear up, I learned this from Copilot
+      return () => {
+        unsubscribe();
+      };
+    } catch (error) {
+      console.log("An error occurred:", error);
+    }
   }, []);
+  
+  
 
 
 
@@ -42,7 +57,7 @@ function Home(props) {
     
     function handleInputData(data){
   
-       const newGoal = {text:data};  
+       const newGoal = {text:data, owner: auth.currentUser.uid};  
       // writeToDB(newGoal);
       // using the generalized function
       writeToDB(newGoal, "goals");
@@ -68,6 +83,10 @@ function Home(props) {
       <View style={styles.topContainer}>
       <Header name = {appName} theme="dark"/>
       <View style={styles.buttonStyle}>
+        {/* <View style={{alignItems:'center',flexDirection:'row'}}> */}
+      {/* <Button title="Sign up" onPress={()=>props.navigation.navigate('Signup')}/>
+      <Button title="Login" onPress={()=>props.navigation.navigate('Login')}/> */}
+        {/* </View> */}
       <Button title="Add a goal" onPress={handleModalVisible}/>
       </View>
       </View>
@@ -124,7 +143,7 @@ const styles = StyleSheet.create({
     },
     topContainer:{
       flex:1,
-      backgroundColor: 'lightgreen',
+      backgroundColor: 'white',
       alignItems: 'center',
   
     },

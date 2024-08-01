@@ -3,6 +3,7 @@ import { database } from "./firebaseSetup";
 import { doc, deleteDoc } from "firebase/firestore"; 
 import {updateDoc} from 'firebase/firestore';
 import { getDocs } from "firebase/firestore";
+import { auth } from "./firebaseSetup";
 
 // export async function writeToDB(goal) {
 // 	try {  
