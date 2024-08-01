@@ -3,6 +3,7 @@ import React from 'react'
 import { TextInput,StyleSheet } from 'react-native';
 import  { useState } from 'react';
 import { Image } from 'react-native';
+import ImageManager from './ImageManager';
 
 
 const styles = StyleSheet.create({
@@ -79,7 +80,7 @@ const Input = (props) => {
      <Image style={styles.imageStyle} alt='a target image' 
             source={require('../assets/2617812.png')} />
       <TextInput 
-        style={{height:40}}
+        style={{height:40 , borderColor: 'gray', borderWidth: 1, width: 200,margin:10}}
         placeholder="Type Something here..."
         onChangeText={newText => setText(newText)}
         value={text}
@@ -87,8 +88,11 @@ const Input = (props) => {
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <Text style={styles.textStyle}>your input is: {text}</Text>
-      <Text>{loseFocusMessage}</Text>
+      {/* <Text style={styles.textStyle}>your input is: {text}</Text>
+      <Text>{loseFocusMessage}</Text> */}
+      
+      <ImageManager/>
+      
       <View style={{flexDirection: 'row'}}>
       <View style={styles.buttonStyle}>
         <Button title='cancel' onPress={handleCancel}/>
