@@ -17,7 +17,9 @@ function ImageManager({modifyImageURI}) {
             return true;
         }
         else{
-            return await requestPermission();
+            const permission = await requestPermission();
+            console.log('permission',permission);
+            return permission.granted;
             
         }
        
@@ -28,7 +30,14 @@ function ImageManager({modifyImageURI}) {
 
         try {
             vefifyPermissions();
-            const result = await ImagePicker.launchCameraAsync({});
+            const result = await ImagePicker.launchCameraAsync(
+                {
+                    mediaTypes: ImagePicker.MediaTypeOptions.All,
+                    allowsEditing: true,
+                    aspect: [4, 3],
+                    quality: 1,
+                  }
+            );
             //console.log('result from camera',result);
             if (!result.canceled) {
                // console.log('photo uri',result.assets[0].uri);
@@ -39,7 +48,7 @@ function ImageManager({modifyImageURI}) {
         }
         catch (err) {
             console.log(err);
-            alert('An error occurred', err.message, [{ text: 'Okay' }]);
+            alert('An error occurred when taking image', err.message, [{ text: 'Okay' }]);
         }
       };
     

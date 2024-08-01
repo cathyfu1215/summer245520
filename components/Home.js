@@ -10,6 +10,9 @@ import { collection, onSnapshot,query,where } from 'firebase/firestore';
 import { database } from '../Firebase/firebaseSetup';
 import { deleteFromDB } from '../Firebase/firestoreHelper';
 import { auth } from '../Firebase/firebaseSetup';
+import {ref} from 'firebase/storage';
+import {storage} from '../Firebase/firebaseSetup';
+import { uploadBytesResumable } from 'firebase/storage';
 
 
 
@@ -61,13 +64,28 @@ function Home(props) {
 
    
     
-    function handleInputData(data){
+    async function handleInputData(data){
   
+      try{
        const newGoal = {text:data, owner: auth.currentUser.uid, image: imageURI};  
       // writeToDB(newGoal);
       // using the generalized function
+      const response = await fetch(newGoal.image);
+      const blob = await response.blob();
+
+      const imageName = newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
+      const imageRef = await ref(storage, `images/${imageName}`)
+      const uploadResult = await uploadBytesResumable(imageRef, blob);
+
       console.log('new goal:', newGoal);
-      writeToDB(newGoal, "goals");
+      const goal= { text:data, 
+                    owner: auth.currentUser.uid, 
+                    image:uploadResult.metadata.fullPath}
+      writeToDB(goal, "goals");
+      }
+      catch(error){
+        console.log('error when handling input goals in home.js:', error);
+      }
   
     }
   
