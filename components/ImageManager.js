@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 
-function ImageManager() {
+function ImageManager({modifyImageURI}) {
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
     const [imageURI, setImageURI] = useState(null);
   
@@ -29,10 +29,12 @@ function ImageManager() {
         try {
             vefifyPermissions();
             const result = await ImagePicker.launchCameraAsync({});
-            console.log('result from camera',result);
+            //console.log('result from camera',result);
             if (!result.canceled) {
-                console.log('photo uri',result.assets[0].uri);
+               // console.log('photo uri',result.assets[0].uri);
                 setImageURI(result.assets[0].uri);
+                // pass it to input.js
+                modifyImageURI(result.assets[0].uri);
             }
         }
         catch (err) {

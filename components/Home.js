@@ -17,13 +17,14 @@ import { auth } from '../Firebase/firebaseSetup';
 function Home(props) {
 
   const [goals,setGoals] = useState([]); 
+  const [imageURI, setImageURI] = useState(null);
 
 
   // useEffect uses a function and a dependency array
   // onSnapshot is a listener that listens to the changes in the database
   useEffect(() => {
     try {
-      console.log('current user:', auth.currentUser.uid);
+      //console.log('current user:', auth.currentUser.uid);
       const unsubscribe = onSnapshot(
         query(collection(database, "goals"), 
         where("owner", "==", auth.currentUser.uid)
@@ -54,12 +55,18 @@ function Home(props) {
     const [modalVisible, setModalVisible] = useState(false);
     const appName = 'Cathy\'s Goal Tracker';
   
+    function setupImageURI(newURI){
+      setImageURI(newURI);
+    }
+
+   
     
     function handleInputData(data){
   
-       const newGoal = {text:data, owner: auth.currentUser.uid};  
+       const newGoal = {text:data, owner: auth.currentUser.uid, image: imageURI};  
       // writeToDB(newGoal);
       // using the generalized function
+      console.log('new goal:', newGoal);
       writeToDB(newGoal, "goals");
   
     }
@@ -91,7 +98,8 @@ function Home(props) {
       </View>
       </View>
       <Input focused = {true} message='Thank you for entering the input' handleInputData={handleInputData}
-             modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}/>
+             modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}
+             setupImageURI={setupImageURI}/>
       <View style={styles.bottomContainer}>
       
       <Text style={styles.textStyle}>Your Goals:</Text>
