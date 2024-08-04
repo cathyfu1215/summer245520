@@ -10,6 +10,9 @@ import { collection, onSnapshot,query,where } from 'firebase/firestore';
 import { database } from '../Firebase/firebaseSetup';
 import { deleteFromDB } from '../Firebase/firestoreHelper';
 import { auth } from '../Firebase/firebaseSetup';
+import {ref} from 'firebase/storage';
+import {storage} from '../Firebase/firebaseSetup';
+import { uploadBytesResumable } from 'firebase/storage';
 
 
 
@@ -17,13 +20,14 @@ import { auth } from '../Firebase/firebaseSetup';
 function Home(props) {
 
   const [goals,setGoals] = useState([]); 
+  const [imageURI, setImageURI] = useState(null);
 
 
   // useEffect uses a function and a dependency array
   // onSnapshot is a listener that listens to the changes in the database
   useEffect(() => {
     try {
-      console.log('current user:', auth.currentUser.uid);
+      //console.log('current user:', auth.currentUser.uid);
       const unsubscribe = onSnapshot(
         query(collection(database, "goals"), 
         where("owner", "==", auth.currentUser.uid)
@@ -54,13 +58,34 @@ function Home(props) {
     const [modalVisible, setModalVisible] = useState(false);
     const appName = 'Cathy\'s Goal Tracker';
   
+    function setupImageURI(newURI){
+      setImageURI(newURI);
+    }
+
+   
     
-    function handleInputData(data){
+    async function handleInputData(data){
   
-       const newGoal = {text:data, owner: auth.currentUser.uid};  
+      try{
+       const newGoal = {text:data, owner: auth.currentUser.uid, image: imageURI};  
       // writeToDB(newGoal);
       // using the generalized function
-      writeToDB(newGoal, "goals");
+      const response = await fetch(newGoal.image);
+      const blob = await response.blob();
+
+      const imageName = newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
+      const imageRef = await ref(storage, `images/${imageName}`)
+      const uploadResult = await uploadBytesResumable(imageRef, blob);
+
+      console.log('new goal:', newGoal);
+      const goal= { text:data, 
+                    owner: auth.currentUser.uid, 
+                    image:uploadResult.metadata.fullPath}
+      writeToDB(goal, "goals");
+      }
+      catch(error){
+        console.log('error when handling input goals in home.js:', error);
+      }
   
     }
   
@@ -91,7 +116,8 @@ function Home(props) {
       </View>
       </View>
       <Input focused = {true} message='Thank you for entering the input' handleInputData={handleInputData}
-             modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}/>
+             modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}
+             setupImageURI={setupImageURI}/>
       <View style={styles.bottomContainer}>
       
       <Text style={styles.textStyle}>Your Goals:</Text>
