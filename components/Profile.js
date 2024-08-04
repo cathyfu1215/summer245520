@@ -3,12 +3,12 @@ import { View, Text } from 'react-native'
 import { auth } from '../Firebase/firebaseSetup';
 import LocationManager from './LocationManager';
 
-function Profile() {
+function Profile(props) {
   return (
     <View>
         <Text style={{margin:10}}>Email:{auth.currentUser.email}</Text>
         <Text style={{margin:10}}>UID:{auth.currentUser.uid}</Text>
-        <LocationManager/>
+        <LocationManager navigation={props.navigation} route={props.route}/>
     </View>
   )
 }

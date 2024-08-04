@@ -14,6 +14,7 @@ import PressableButton from './components/PressableButton';
 import { Text } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
+import Map from './components/Map';
 
 
 
@@ -84,6 +85,7 @@ const AppStack = <>
                   }
                 }}
                 />
+    <Stack.Screen name="Map" component={Map}/>
 </>
   
   return(

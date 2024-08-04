@@ -4,12 +4,12 @@ import { Text, View } from 'react-native'
 import PressableButton from './PressableButton'
 import * as Location from 'expo-location';
 import { useState } from 'react';
-import {mapAPIkey} from "@env";
+import {mapAPIkey,apiKey} from "@env";
 import { Image } from 'react-native';
 
 
 
-function LocationManager() {
+function LocationManager(props) {
     const [status, requestPermission] = Location.useForegroundPermissions();
     // an object that implements LocationPermissionResponse interface and 
     // an async function to request permission.
@@ -18,6 +18,10 @@ function LocationManager() {
     const [mapURL, setMapURL] = useState(null);
 
 
+    const jumpToMap = () => {
+        //console.log('jump to map');
+        props.navigation.navigate('Map');
+    }
     const vefifyPermissions = async() => {
         if(status.granted === true) {
             return true;
@@ -53,6 +57,10 @@ function LocationManager() {
         <PressableButton pressedFunction={locateUserHandler}>
             <Text>Get My Location</Text>
         </PressableButton>
+
+        <PressableButton pressedFunction={jumpToMap}>
+            <Text>Go to Map Screen</Text>
+        </PressableButton>
         
         {location?<View style={{margin:10}}>
         <Text>location:</Text>
@@ -60,7 +68,7 @@ function LocationManager() {
         <Text>Longitude:{location.coords.longitude}</Text>
         
         <View style={{margin:10,alignSelf:'center'}}>
-        <Image source={{uri:mapURL,width:200,height:200}}/>
+        <Image source={{uri:mapURL,width:300,height:300}}/>
         </View>
 
         </View>
