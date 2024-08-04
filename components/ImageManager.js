@@ -29,7 +29,7 @@ function ImageManager({modifyImageURI}) {
        
 
         try {
-            vefifyPermissions();
+            if(vefifyPermissions()){
             const result = await ImagePicker.launchCameraAsync(
                 {
                     mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -45,6 +45,7 @@ function ImageManager({modifyImageURI}) {
                 // pass it to input.js
                 modifyImageURI(result.assets[0].uri);
             }
+        }
         }
         catch (err) {
             console.log(err);

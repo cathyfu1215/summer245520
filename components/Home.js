@@ -37,7 +37,7 @@ function Home(props) {
           querySnapshot.forEach((doc) => {
             goals.push({...doc.data(), id: doc.id}); //spread it and add id(key-value)
           });
-          console.log(goals);
+          //console.log(goals);
           setGoals(goals);
         }
       )
@@ -68,16 +68,21 @@ function Home(props) {
   
       try{
        const newGoal = {text:data, owner: auth.currentUser.uid, image: imageURI};  
+       //console.log('new goal:', newGoal);
       // writeToDB(newGoal);
       // using the generalized function
       const response = await fetch(newGoal.image);
       const blob = await response.blob();
+      //console.log('blob:', blob);
 
       const imageName = newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
+      //console.log('image name:', imageName);
       const imageRef = await ref(storage, `images/${imageName}`)
+      //console.log('image ref:', imageRef);
       const uploadResult = await uploadBytesResumable(imageRef, blob);
+      //console.log('upload result:', uploadResult);
 
-      console.log('new goal:', newGoal);
+     // console.log('new goal:', newGoal);
       const goal= { text:data, 
                     owner: auth.currentUser.uid, 
                     image:uploadResult.metadata.fullPath}

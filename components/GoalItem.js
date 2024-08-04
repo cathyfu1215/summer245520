@@ -11,7 +11,8 @@ function GoalItem(props) {
 
   function handleInformation(){
     // navigation.navigate(routeName, paramObject)
-    props.navigation.navigate('Details',{text:props.item.text, id:props.item.id, isWarning:false});
+    props.navigation.navigate('Details',{text:props.item.text, id:props.item.id, 
+      image:props.item.image,isWarning:false});
     //wrap the buttons in a view to style them
   }
     return (
