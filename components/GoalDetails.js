@@ -13,7 +13,7 @@ function GoalDetails({route,navigation}) {
   //console.log("params in GoalDetails", route.params);
   
   const reference = ref(storage, route.params.image);
-  console.log("reference", reference);
+  //console.log("reference", reference);
   const [imageURL, setImageURL] = useState("");
   useEffect(() => {
     getDownloadURL(reference)

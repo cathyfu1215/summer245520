@@ -18,7 +18,7 @@ function ImageManager({modifyImageURI}) {
         }
         else{
             const permission = await requestPermission();
-            console.log('permission',permission);
+            console.log('image permission',permission);
             return permission.granted;
             
         }
@@ -46,7 +46,11 @@ function ImageManager({modifyImageURI}) {
                 modifyImageURI(result.assets[0].uri);
             }
         }
+        else{
+            alert('Permission to access camera was denied');
         }
+        }
+        
         catch (err) {
             console.log(err);
             alert('An error occurred when taking image', err.message, [{ text: 'Okay' }]);
