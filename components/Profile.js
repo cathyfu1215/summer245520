@@ -4,6 +4,7 @@ import { auth } from '../Firebase/firebaseSetup';
 import LocationManager from './LocationManager';
 
 function Profile(props) {
+  //console.log(props.route.params);
   return (
     <View>
         <Text style={{margin:10}}>Email:{auth.currentUser.email}</Text>

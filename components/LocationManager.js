@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Pressable } from 'react-native'
 import { Text, View } from 'react-native'
 import PressableButton from './PressableButton'
@@ -9,7 +9,8 @@ import { Image } from 'react-native';
 
 
 
-function LocationManager(props) {
+function LocationManager({navigation,route}) {
+    console.log('route params in location manager:',route.params);    
     const [status, requestPermission] = Location.useForegroundPermissions();
     // an object that implements LocationPermissionResponse interface and 
     // an async function to request permission.
@@ -17,10 +18,17 @@ function LocationManager(props) {
     const [location, setLocation] = useState(null);
     const [mapURL, setMapURL] = useState(null);
 
+    useEffect(() => {
+        if(route.params.seletedLocation){
+            console.log('selected location passed from map:',route.params.seletedLocation);
+            setLocation(route.params.seletedLocation);
+            setMapURL( `https://maps.googleapis.com/maps/api/staticmap?center=${route.params.seletedLocation.latitude},${route.params.seletedLocation.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${route.params.seletedLocation.latitude},${route.params.seletedLocation.longitude}&key=${mapAPIkey}`);
+        }
+    }, []);
 
     const jumpToMap = () => {
         //console.log('jump to map');
-        props.navigation.navigate('Map');
+        navigation.navigate('Map');
     }
     const vefifyPermissions = async() => {
         if(status.granted === true) {
@@ -54,6 +62,7 @@ function LocationManager(props) {
      
   return (
     <View style={{flex:0}}>
+        
         <PressableButton pressedFunction={locateUserHandler}>
             <Text>Get My Location</Text>
         </PressableButton>
@@ -63,17 +72,34 @@ function LocationManager(props) {
         </PressableButton>
         
         {location?<View style={{margin:10}}>
-        <Text>location:</Text>
-        <Text>Altitude:{location.coords.altitude}</Text>
-        <Text>Longitude:{location.coords.longitude}</Text>
+        {/* <Text>location:</Text>
+        <Text>Latitude:{location.coords.latitude}</Text>
+        <Text>Longitude:{location.coords.longitude}</Text> */}
         
         <View style={{margin:10,alignSelf:'center'}}>
         <Image source={{uri:mapURL,width:300,height:300}}/>
         </View>
 
         </View>
-        :<View></View>}
+        :<View></View>
+        }
+
+
+        
+        {/* {passedLocation?<View style={{margin:10}}>
+        <Text>location:</Text>
+        <Text>Altitude:{passedLocation.coords.altitude}</Text>
+        <Text>Longitude:{passedLocation.coords.longitude}</Text>
+        
+        <View style={{margin:10,alignSelf:'center'}}>
+        <Image source={{uri:mapURL,width:300,height:300}}/>
+        </View>
+
+        </View>
+        :<View></View>
+        } */}
     </View>
+   
   )
 }
 
