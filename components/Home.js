@@ -77,7 +77,7 @@ function Home(props) {
 
       const imageName = newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
       //console.log('image name:', imageName);
-      const imageRef = await ref(storage, `images/${imageName}`)
+      const imageRef = ref(storage, `images/${imageName}`)
       //console.log('image ref:', imageRef);
       const uploadResult = await uploadBytesResumable(imageRef, blob);
       //console.log('upload result:', uploadResult);

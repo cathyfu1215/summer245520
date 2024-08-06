@@ -49,7 +49,7 @@ function GoalUsers({goalID}) {
           const existedUsers = await getFromDB(goalID,'goals','users');
           if(existedUsers.length>0){
                         setUsers(existedUsers);
-                        console.log('users exist,no need to fetch');
+                        //console.log('users exist,no need to fetch');
                         return;
           }
           // if in that goal document there is no users collection, then fetch the data
