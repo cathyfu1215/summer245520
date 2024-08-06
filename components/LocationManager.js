@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import { mapAPIkey } from "@env";
 
 function LocationManager({ navigation, route }) {
-    console.log('route params in location manager:', route.params);    
+    //console.log('route params in location manager:', route.params);    
     const [status, requestPermission] = Location.useForegroundPermissions();
     const [location, setLocation] = useState(null);
     const [mapURL, setMapURL] = useState(null);

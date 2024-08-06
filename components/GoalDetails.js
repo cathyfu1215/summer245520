@@ -23,7 +23,7 @@ function GoalDetails({route,navigation}) {
       .catch((error) => {
         console.log('error downloading the image',error);
       });
-  }, []);
+  }, [route.params.image]);
 
  //console.log("imageURL", imageURL);
 
