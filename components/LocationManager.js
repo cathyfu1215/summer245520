@@ -3,8 +3,13 @@ import { Pressable, Text, View, Image } from 'react-native';
 import PressableButton from './PressableButton';
 import * as Location from 'expo-location';
 import { mapAPIkey } from "@env";
+import {Dimensions} from 'react-native';
+
+
 
 function LocationManager({ navigation, route }) {
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
     //console.log('route params in location manager:', route.params);    
     const [status, requestPermission] = Location.useForegroundPermissions();
     const [location, setLocation] = useState(null);
@@ -59,7 +64,7 @@ function LocationManager({ navigation, route }) {
             {location ? (
                 <View style={{ margin: 10 }}>
                     <View style={{ margin: 10, alignSelf: 'center' }}>
-                        <Image source={{ uri: mapURL, width: 300, height: 300 }} />
+                        <Image source={{ uri: mapURL, width: 0.8*windowWidth, height: 0.5*windowHeight }} />
                     </View>
                 </View>
             ) : (
