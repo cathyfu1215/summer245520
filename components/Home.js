@@ -77,8 +77,8 @@ function Home(props) {
       const response = await fetch(newGoal.image);
       const blob = await response.blob();
 
-      const imageName = newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
-      const imageRef = ref(storage, `images/${imageName}`);
+      const imageName = await newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
+      const imageRef = await ref(storage, `images/${imageName}`);
       const uploadResult = await uploadBytesResumable(imageRef, blob);
   
    
