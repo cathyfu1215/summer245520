@@ -15,6 +15,7 @@ import { Text } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import Map from './components/Map';
+import * as Notifications from 'expo-notifications';
 
 
 
@@ -22,6 +23,14 @@ import Map from './components/Map';
 
 
 const Stack = createNativeStackNavigator();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
 
