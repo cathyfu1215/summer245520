@@ -6,7 +6,7 @@ import { mapAPIkey } from "@env";
 import {Dimensions} from 'react-native';
 import { setUserLocation } from '../Firebase/firestoreHelper';
 import { auth } from '../Firebase/firebaseSetup';
-
+import { getUserDoc } from '../Firebase/firestoreHelper';
 
 
 function LocationManager({ navigation, route }) {
@@ -16,6 +16,27 @@ function LocationManager({ navigation, route }) {
     const [status, requestPermission] = Location.useForegroundPermissions();
     const [location, setLocation] = useState(null);
     const [mapURL, setMapURL] = useState(null);
+
+    const [savedLocation, setSavedLocation] = useState(null);
+
+    useEffect(() => {
+        const fetchUserDoc = async () => {
+          try {
+            const docData = await getUserDoc(auth.currentUser.uid);
+            if (docData) {
+              console.log('user doc.data:', docData);
+              setSavedLocation(docData.location);
+            } else {
+              console.log('user doc not found');
+            }
+          } catch (err) {
+            console.log('error getting user doc:', err);
+          }
+        };
+      
+        fetchUserDoc();
+      }, []);
+
 
     useEffect(() => {
         if (route.params && route.params.selectedLocation) {
@@ -64,6 +85,8 @@ function LocationManager({ navigation, route }) {
 
     return (
         <View style={{ flex: 0 }}>
+            {savedLocation&&<View style={{margin:10}}><Text>User's saved Location is:</Text>
+            <Text>{savedLocation.latitude},{savedLocation.longitude}</Text></View>}
             <PressableButton pressedFunction={locateUserHandler}>
                 <Text>Get My Location</Text>
             </PressableButton>
