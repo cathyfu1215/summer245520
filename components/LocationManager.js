@@ -56,6 +56,7 @@ function LocationManager({ navigation, route }) {
     }
 
     const jumpToMap = () => {
+        //before this, set up the Stack.screen in App.js
         navigation.navigate('Map');
     };
 
@@ -92,7 +93,7 @@ function LocationManager({ navigation, route }) {
             </PressableButton>
 
             <PressableButton pressedFunction={jumpToMap}>
-                <Text>Go to Map Screen</Text>
+                <Text>Choose my Location</Text>
             </PressableButton>
 
             {location ? (

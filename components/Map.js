@@ -15,7 +15,7 @@ function Map({navigation,route}) {
         // }
 );
     function handleGoToProfile() {
-        console.log('go to profile,location selected is: ',selectedLocation);
+        //console.log('go to profile,location selected is: ',selectedLocation);
         navigation.navigate('Profile',{selectedLocation:selectedLocation});
         
     }
