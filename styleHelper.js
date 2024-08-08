@@ -22,6 +22,8 @@ export const styleHelper = StyleSheet.create({
               fontSize: 15,
               color: 'darkblue',
               marginVertical:5,
+              marginRight:30,
+              marginLeft:10,
               backgroundColor: 'lightgrey',
               borderRadius: 10,
             },

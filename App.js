@@ -14,6 +14,7 @@ import PressableButton from './components/PressableButton';
 import { Text } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
+import Map from './components/Map';
 
 
 
@@ -28,7 +29,7 @@ export default function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('User is signed in',user);
+        //console.log('User is signed in',user);
         setUser(user);
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
@@ -84,6 +85,7 @@ const AppStack = <>
                   }
                 }}
                 />
+    <Stack.Screen name="Map" component={Map}/>
 </>
   
   return(

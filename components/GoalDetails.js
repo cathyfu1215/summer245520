@@ -5,11 +5,27 @@ import { Button } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { updateDB } from '../Firebase/firestoreHelper';
 import GoalUsers from './GoalUsers';
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../Firebase/firebaseSetup";
+import { Image } from 'react-native';
 
 function GoalDetails({route,navigation}) {
+  //console.log("params in GoalDetails", route.params);
+  
+  const reference = ref(storage, route.params.image);
+  //console.log("reference", reference);
+  const [imageURL, setImageURL] = useState("");
+  useEffect(() => {
+    getDownloadURL(reference)
+      .then((url) => {
+        setImageURL(url);
+      })
+      .catch((error) => {
+        console.log('error downloading the image',error);
+      });
+  }, [route.params.image]);
 
-  //console.log(route.params);
+ //console.log("imageURL", imageURL);
 
   /*
   Modification after lab3:
@@ -40,15 +56,24 @@ function GoalDetails({route,navigation}) {
     <View>
     
 
-      {route.params ? (<Text style={warning && styles.warningStyle}>
-          goal text :
-          {route.params.text}, id:{route.params.id}
+      <Text style={warning && styles.warningStyle}>
+          goal text : {route.params.text}
         </Text>
-        ) : (
-          <Text></Text>
-        )}
+        <Text style={warning && styles.warningStyle}>
+          id:{route.params.id}
+        </Text>
+        
+
+      <View style={{alignSelf:'center',margin:20}}>
+      {imageURL !== "" ? (
+        <Image source={{ uri: imageURL }} style={{ height: 200, width: 200 }} />
+      ) : (
+        <Text>No image attached</Text>
+      )}
+      </View>
 
       <GoalUsers goalID={route.params.id}/>
+
       </View>
     );
   }

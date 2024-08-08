@@ -37,7 +37,7 @@ function Home(props) {
           querySnapshot.forEach((doc) => {
             goals.push({...doc.data(), id: doc.id}); //spread it and add id(key-value)
           });
-          console.log(goals);
+          //console.log(goals);
           setGoals(goals);
         }
       )
@@ -63,29 +63,35 @@ function Home(props) {
     }
 
    
+
     
-    async function handleInputData(data){
+    
+   async function handleInputData(data){
   
-      try{
+      
        const newGoal = {text:data, owner: auth.currentUser.uid, image: imageURI};  
-      // writeToDB(newGoal);
+       
+      try{
+      
       // using the generalized function
       const response = await fetch(newGoal.image);
       const blob = await response.blob();
 
-      const imageName = newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
-      const imageRef = await ref(storage, `images/${imageName}`)
+      const imageName = await newGoal.image.substring(newGoal.image.lastIndexOf('/') + 1);
+      const imageRef = await ref(storage, `images/${imageName}`);
       const uploadResult = await uploadBytesResumable(imageRef, blob);
-
-      console.log('new goal:', newGoal);
+  
+   
       const goal= { text:data, 
                     owner: auth.currentUser.uid, 
                     image:uploadResult.metadata.fullPath}
-      writeToDB(goal, "goals");
+      
+                    writeToDB(goal, "goals");
       }
       catch(error){
-        console.log('error when handling input goals in home.js:', error);
+        console.log('error in uploading image:', error);
       }
+     
   
     }
   
@@ -115,7 +121,7 @@ function Home(props) {
       <Button title="Add a goal" onPress={handleModalVisible}/>
       </View>
       </View>
-      <Input focused = {true} message='Thank you for entering the input' handleInputData={handleInputData}
+      <Input handleInputData={handleInputData}
              modalVisible={modalVisible} handleModalNotVisible={handleModalNotVisible}
              setupImageURI={setupImageURI}/>
       <View style={styles.bottomContainer}>
