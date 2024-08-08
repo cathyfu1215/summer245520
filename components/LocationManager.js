@@ -4,7 +4,9 @@ import PressableButton from './PressableButton';
 import * as Location from 'expo-location';
 import { mapAPIkey } from "@env";
 import {Dimensions} from 'react-native';
-
+import { setUserLocation } from '../Firebase/firestoreHelper';
+import { auth } from '../Firebase/firebaseSetup';
+import { getUserDoc } from '../Firebase/firestoreHelper';
 
 
 function LocationManager({ navigation, route }) {
@@ -15,6 +17,27 @@ function LocationManager({ navigation, route }) {
     const [location, setLocation] = useState(null);
     const [mapURL, setMapURL] = useState(null);
 
+    const [savedLocation, setSavedLocation] = useState(null);
+
+    useEffect(() => {
+        const fetchUserDoc = async () => {
+          try {
+            const docData = await getUserDoc(auth.currentUser.uid);
+            if (docData) {
+              console.log('user doc.data:', docData);
+              setSavedLocation(docData.location);
+            } else {
+              console.log('user doc not found');
+            }
+          } catch (err) {
+            console.log('error getting user doc:', err);
+          }
+        };
+      
+        fetchUserDoc();
+      }, []);
+
+
     useEffect(() => {
         if (route.params && route.params.selectedLocation) {
             console.log('selected location passed from map:', route.params.selectedLocation);
@@ -23,7 +46,17 @@ function LocationManager({ navigation, route }) {
         }
     }, [route.params]);
 
+    const handleSaveLocation = () => {
+        if (location) {
+            console.log('save location:', location);
+            setUserLocation(location, auth.currentUser.uid);
+        } else {
+            alert('Please get your location first');
+        }
+    }
+
     const jumpToMap = () => {
+        //before this, set up the Stack.screen in App.js
         navigation.navigate('Map');
     };
 
@@ -53,23 +86,29 @@ function LocationManager({ navigation, route }) {
 
     return (
         <View style={{ flex: 0 }}>
+            {savedLocation&&<View style={{margin:10}}><Text>User's saved Location is:</Text>
+            <Text>{savedLocation.latitude},{savedLocation.longitude}</Text></View>}
             <PressableButton pressedFunction={locateUserHandler}>
                 <Text>Get My Location</Text>
             </PressableButton>
 
             <PressableButton pressedFunction={jumpToMap}>
-                <Text>Go to Map Screen</Text>
+                <Text>Choose my Location</Text>
             </PressableButton>
 
             {location ? (
                 <View style={{ margin: 10 }}>
                     <View style={{ margin: 10, alignSelf: 'center' }}>
-                        <Image source={{ uri: mapURL, width: 0.8*windowWidth, height: 0.5*windowHeight }} />
+                        <Image source={{ uri: mapURL, width: 0.8*windowWidth, height: 0.3*windowHeight }} />
                     </View>
                 </View>
             ) : (
                 <View></View>
             )}
+
+            <PressableButton pressedFunction={handleSaveLocation}>
+             <Text>Save My Location</Text>
+            </PressableButton>
         </View>
     );
 }
