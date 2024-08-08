@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore"; 
 import { database } from "./firebaseSetup";
-import { doc, deleteDoc } from "firebase/firestore"; 
+import { doc, deleteDoc,setDoc,getDoc } from "firebase/firestore"; 
 import {updateDoc} from 'firebase/firestore';
 import { getDocs } from "firebase/firestore";
 import { auth } from "./firebaseSetup";
@@ -92,4 +92,14 @@ export async function writeToDB(data, collectionName) {
 		catch (err) {
 			console.log(err)
 		  }
+	  }
+
+
+
+	  export async function setUserLocation(location, uid) {
+		try {
+		  await setDoc(doc(database,"users",uid), {location:location,merge:true});
+		} catch (err) {
+		  console.log("error setting the location of the user ",uid, err);
+		}
 	  }

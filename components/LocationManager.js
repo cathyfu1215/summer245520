@@ -4,6 +4,8 @@ import PressableButton from './PressableButton';
 import * as Location from 'expo-location';
 import { mapAPIkey } from "@env";
 import {Dimensions} from 'react-native';
+import { setUserLocation } from '../Firebase/firestoreHelper';
+import { auth } from '../Firebase/firebaseSetup';
 
 
 
@@ -22,6 +24,15 @@ function LocationManager({ navigation, route }) {
             setMapURL(`https://maps.googleapis.com/maps/api/staticmap?center=${route.params.selectedLocation.latitude},${route.params.selectedLocation.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${route.params.selectedLocation.latitude},${route.params.selectedLocation.longitude}&key=${mapAPIkey}`);
         }
     }, [route.params]);
+
+    const handleSaveLocation = () => {
+        if (location) {
+            console.log('save location:', location);
+            setUserLocation(location, auth.currentUser.uid);
+        } else {
+            alert('Please get your location first');
+        }
+    }
 
     const jumpToMap = () => {
         navigation.navigate('Map');
@@ -64,12 +75,16 @@ function LocationManager({ navigation, route }) {
             {location ? (
                 <View style={{ margin: 10 }}>
                     <View style={{ margin: 10, alignSelf: 'center' }}>
-                        <Image source={{ uri: mapURL, width: 0.8*windowWidth, height: 0.5*windowHeight }} />
+                        <Image source={{ uri: mapURL, width: 0.8*windowWidth, height: 0.3*windowHeight }} />
                     </View>
                 </View>
             ) : (
                 <View></View>
             )}
+
+            <PressableButton pressedFunction={handleSaveLocation}>
+             <Text>Save My Location</Text>
+            </PressableButton>
         </View>
     );
 }
