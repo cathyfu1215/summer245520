@@ -13,6 +13,7 @@ import { auth } from '../Firebase/firebaseSetup';
 import {ref} from 'firebase/storage';
 import {storage} from '../Firebase/firebaseSetup';
 import { uploadBytesResumable } from 'firebase/storage';
+import Constants from 'expo-constants';
 
 
 

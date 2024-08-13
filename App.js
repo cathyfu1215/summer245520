@@ -16,6 +16,7 @@ import Map from './components/Map';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import { Linking, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 
 
@@ -154,7 +155,9 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!');
       return;
     }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
+    token = (await Notifications.getExpoPushTokenAsync({
+      projectId: Constants.manifest.extra.projectId,
+    })).data;
     console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
