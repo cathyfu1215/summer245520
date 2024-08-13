@@ -15,12 +15,17 @@ import { useNavigation } from '@react-navigation/native';
 import Map from './components/Map';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
-import { Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
+
+
+
 
 const Stack = createNativeStackNavigator();
 
 Notifications.setNotificationHandler({
-  handleNotification: async () => ({
+  handleNotification: async () => ({ //mark that the function returns a promise
+
+    // or we can use new Promise((resolve, reject) => {...}  to return a promise
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: true,
@@ -46,15 +51,21 @@ export default function App() {
   useEffect(() => {
     registerForPushNotificationsAsync();
 
+    //listener receives a function
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       console.log(notification);
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       console.log("User has tapped the notification");
+      console.log('data in the content',response.notification.request.content.data);
+      console.log('url',response.notification.request.content.data.url);
+      Linking.openURL(response.notification.request.content.data.url);
+
+      
     });
 
-    return () => {
+    return () => {//the clean up function
       Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
     };

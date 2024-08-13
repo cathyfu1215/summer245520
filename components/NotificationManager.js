@@ -9,8 +9,11 @@ function NotificationManager() {
           if (await verifyPermissions()) {
             let identifier = await Notifications.scheduleNotificationAsync({
               content: {// this is the notificationRequestInput object
-                title: 'Test Notification',
-                body: 'This is a test notification',
+                title: 'Time to add a goal',
+                body: 'And then you can start working on it!',
+                data:{
+                  url: 'https://www.google.com',
+                },
               },
               trigger: {
                 seconds: 5, // Trigger after 5 seconds
@@ -45,7 +48,7 @@ function NotificationManager() {
     <View>
         <Text>  NotificationManager </Text>
         <Pressable style={{backgroundColor:'lightblue',padding:10,margin:10}} onPress={scheduleNotificationHandler}>
-            <Text style={{color:'black',alignSelf:'center'}}>Enable Notifications</Text>
+            <Text style={{color:'black',alignSelf:'center'}}>Remind me to add a goal</Text>
         </Pressable>
     </View>
   )
