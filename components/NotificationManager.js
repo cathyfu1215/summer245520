@@ -8,12 +8,14 @@ function NotificationManager() {
         try {
           if (await verifyPermissions()) {
             let identifier = await Notifications.scheduleNotificationAsync({
-              content: {
+              content: {// this is the notificationRequestInput object
                 title: 'Test Notification',
                 body: 'This is a test notification',
               },
               trigger: {
                 seconds: 5, // Trigger after 5 seconds
+                // date: new Date(Date.now() + 30 * 60 * 1000), // Trigger 30 minutes from now
+                // The date property is used because it expects a Date object, which represents a specific point in time, even if that point is calculated based on the current time plus an interval.
               },
             });
             console.log('notification scheduled:', identifier);
