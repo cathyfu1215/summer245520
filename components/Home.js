@@ -39,7 +39,12 @@ function Home(props) {
   }, []);
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    registerForPushNotificationsAsync().then(token => {
+      console.log("Expo Push Token:", token);
+      setExpoPushToken(token);
+    }).catch(err => {
+      console.log('error in getting push token:', err);
+    });
 
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {
@@ -53,6 +58,7 @@ function Home(props) {
     let token;
     if (Constants.isDevice) {
       const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      console.log("Existing Status:", existingStatus);
       let finalStatus = existingStatus;
       if (existingStatus !== 'granted') {
         const { status } = await Notifications.requestPermissionsAsync();
@@ -62,11 +68,14 @@ function Home(props) {
         Alert.alert('Failed to get push token for push notification!');
         return;
       }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
+      token = (await Notifications.getExpoPushTokenAsync({
+        projectId: Constants.expoConfig.extra.eas.projectId,
+      })).data; // Ensure you access the token correctly
+      console.log("Generated Token:", token);
     } else {
       Alert.alert('Must use physical device for Push Notifications');
     }
-
+  
     if (Platform.OS === 'android') {
       Notifications.setNotificationChannelAsync('default', {
         name: 'default',
@@ -75,9 +84,10 @@ function Home(props) {
         lightColor: '#FF231F7C',
       });
     }
-
+  
     return token;
   };
+  
 
   const handleInputData = async (data) => {
     const newGoal = { text: data, owner: auth.currentUser.uid, image: imageURI };
@@ -114,6 +124,11 @@ function Home(props) {
   };
 
   const sendNotification = async () => {
+    if (!expoPushToken) {
+      Alert.alert('Push token is not available');
+      return;
+    }
+
     try {
       await fetch("https://exp.host/--/api/v2/push/send", {
         method: "POST",

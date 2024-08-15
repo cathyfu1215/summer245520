@@ -3,7 +3,7 @@
     "name": "goaltracker",
     "slug": "summer24",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -12,25 +12,35 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.cathyfu.summer24"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-  [
-    "expo-image-picker",
-    {
-      "cameraPermission": "The app needs access to your camera."
-      
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "The app needs access to your camera."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "10e352c1-62d9-4674-96dd-4536774be2ac"
+      }
     }
-  ]
-]
   }
 }
