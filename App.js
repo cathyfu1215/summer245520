@@ -58,12 +58,10 @@ export default function App() {
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log("User has tapped the notification");
-      console.log('data in the content',response.notification.request.content.data);
-      console.log('url',response.notification.request.content.data.url);
+      // console.log("User has tapped the notification");
+      // console.log('data in the content',response.notification.request.content.data);
+      // console.log('url',response.notification.request.content.data.url);
       Linking.openURL(response.notification.request.content.data.url);
-
-      
     });
 
     return () => {//the clean up function
